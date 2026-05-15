@@ -11,8 +11,11 @@ const app = express();
 const server = http.createServer(app);
 
 const FRONTEND_ORIGIN = process.env.FRONTEND_ORIGIN || "http://localhost:5173";
-const DEPLOYED_FRONTEND_ORIGIN = process.env.DEPLOYED_FRONTEND_ORIGIN || "https://luna-petals.vercel.app";
-const allowedOrigins = [FRONTEND_ORIGIN, DEPLOYED_FRONTEND_ORIGIN].filter(Boolean);
+const DEPLOYED_FRONTEND_ORIGIN =
+  process.env.DEPLOYED_FRONTEND_ORIGIN || "https://luna-petals.vercel.app";
+const allowedOrigins = [FRONTEND_ORIGIN, DEPLOYED_FRONTEND_ORIGIN].filter(
+  Boolean,
+);
 
 const corsOptions = {
   origin: (origin, callback) => {
