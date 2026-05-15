@@ -11,19 +11,29 @@ const app = express();
 const server = http.createServer(app);
 
 const FRONTEND_ORIGIN = process.env.FRONTEND_ORIGIN || "http://localhost:5173";
+const DEPLOYED_FRONTEND_ORIGIN = process.env.DEPLOYED_FRONTEND_ORIGIN || "https://luna-petals.vercel.app";
+const allowedOrigins = [FRONTEND_ORIGIN, DEPLOYED_FRONTEND_ORIGIN].filter(Boolean);
+
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error(`CORS not allowed: ${origin}`));
+    }
+  },
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+};
 
 const io = new Server(server, {
-  cors: {
-    origin: FRONTEND_ORIGIN,
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
-  },
+  cors: corsOptions,
 });
 
 // Connect MongoDB
 connectDB();
 
 // Middleware
-app.use(cors({ origin: FRONTEND_ORIGIN }));
+app.use(cors(corsOptions));
 app.use(express.json());
 
 // Routes
