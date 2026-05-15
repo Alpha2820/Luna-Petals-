@@ -522,7 +522,7 @@ export default function Home() {
             on Instagram
           </h2>
           <a
-            href="https://www.instagram.com/luna.petalss"
+            href="https://www.instagram.com/lunapetalss.co/"
             target="_blank"
             className="btn btn-dark"
             rel="noreferrer"
