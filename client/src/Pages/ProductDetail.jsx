@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import { useNavigate } from "react-router-dom";
+import { API_BASE_URL } from "../api";
 
 const FALLBACK_PRODUCTS = {
   "ethereal-romance": {
@@ -182,7 +183,7 @@ export default function ProductDetail() {
     async function fetchProduct() {
       try {
         setLoading(true);
-        const res = await fetch(`/api/products/${id}`);
+        const res = await fetch(`${API_BASE_URL}/api/products/${id}`);
         const data = await res.json();
 
         // Format API data to match expected structure

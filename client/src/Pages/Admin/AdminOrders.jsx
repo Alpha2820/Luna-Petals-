@@ -1,4 +1,5 @@
 import React from "react";
+import { API_BASE_URL } from "../../api";
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -21,7 +22,7 @@ export default function AdminOrders() {
       return;
     }
     try {
-      const res = await fetch("http://localhost:5000/api/orders/all", {
+      const res = await fetch(`${API_BASE_URL}/api/orders/all`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await res.json();
@@ -53,17 +54,14 @@ export default function AdminOrders() {
   const updateStatus = async (orderId, status) => {
     setUpdating(orderId);
     try {
-      const res = await fetch(
-        `http://localhost:5000/api/orders/${orderId}/status`,
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({ status }),
+      const res = await fetch(`${API_BASE_URL}/api/orders/${orderId}/status`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
-      );
+        body: JSON.stringify({ status }),
+      });
       const updated = await res.json();
       setOrders((prev) => prev.map((o) => (o._id === orderId ? updated : o)));
     } catch (err) {

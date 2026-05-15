@@ -1,4 +1,5 @@
 import React from "react";
+import { API_BASE_URL } from "../../api";
 
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -15,7 +16,7 @@ export default function AdminDashboard() {
       return;
     }
     try {
-      const res = await fetch("http://localhost:5000/api/orders/all", {
+      const res = await fetch(`${API_BASE_URL}/api/orders/all`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await res.json();

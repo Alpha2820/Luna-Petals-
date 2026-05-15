@@ -13,6 +13,7 @@ import { Link } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import { useWishlist } from "../context/WishlistContext";
 import { useAuth } from "../context/AuthContext";
+import { API_BASE_URL } from "../api";
 
 export default function Home() {
   const { addToCart } = useCart();
@@ -68,7 +69,7 @@ export default function Home() {
     async function fetchProducts() {
       try {
         setLoadingProducts(true);
-        const res = await fetch("/api/products");
+        const res = await fetch(`${API_BASE_URL}/api/products`);
         const data = await res.json();
 
         // Take first 4 products and format them

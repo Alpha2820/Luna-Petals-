@@ -4,6 +4,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { useCart } from "../context/CartContext";
 import { useWishlist } from "../context/WishlistContext";
+import { API_BASE_URL } from "../api";
 
 const SORT_OPTIONS = [
   { label: "Newest First", value: "newest" },
@@ -30,7 +31,7 @@ export default function AllProducts() {
     async function fetchProducts() {
       try {
         if (products.length === 0) setLoading(true);
-        const res = await fetch("/api/products");
+        const res = await fetch(`${API_BASE_URL}/api/products`);
         const data = await res.json();
         setProducts(data);
 

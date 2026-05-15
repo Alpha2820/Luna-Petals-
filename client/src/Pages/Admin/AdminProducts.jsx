@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { API_BASE_URL } from "../../api";
 
 const EMPTY = {
   name: "",
@@ -33,7 +34,7 @@ export default function AdminProducts() {
 
   const fetchProducts = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/products");
+      const res = await fetch(`${API_BASE_URL}/api/products`);
       const data = await res.json();
       setProducts(data);
     } catch (err) {
@@ -76,7 +77,7 @@ export default function AdminProducts() {
       if (imageFile) {
         const formData = new FormData();
         formData.append("image", imageFile);
-        const uploadRes = await fetch("http://localhost:5000/api/upload", {
+        const uploadRes = await fetch(`${API_BASE_URL}/api/upload`, {
           method: "POST",
           headers: { Authorization: `Bearer ${token}` },
           body: formData,
@@ -105,8 +106,8 @@ export default function AdminProducts() {
       };
 
       const url = editId
-        ? `http://localhost:5000/api/products/${editId}`
-        : "http://localhost:5000/api/products";
+        ? `${API_BASE_URL}/api/products/${editId}`
+        : `${API_BASE_URL}/api/products`;
       const method = editId ? "PUT" : "POST";
 
       const res = await fetch(url, {
@@ -158,7 +159,7 @@ export default function AdminProducts() {
   const handleDelete = async (id) => {
     if (!window.confirm("Delete this product?")) return;
     try {
-      await fetch(`http://localhost:5000/api/products/${id}`, {
+      await fetch(`${API_BASE_URL}/api/products/${id}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });

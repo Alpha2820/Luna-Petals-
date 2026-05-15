@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import { useAuth } from "../context/AuthContext";
+import { API_BASE_URL } from "../api";
 
-const API = "http://localhost:5000";
 const DELIVERY = 150;
 
 export default function Checkout() {

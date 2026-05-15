@@ -2,8 +2,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { Link, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-
-const API = "http://localhost:5000";
+import { API_BASE_URL } from "../api";
 
 const STEPS = [
   { id: 0, title: "Order Placed", desc: null },

@@ -10,9 +10,11 @@ dotenv.config();
 const app = express();
 const server = http.createServer(app);
 
+const FRONTEND_ORIGIN = process.env.FRONTEND_ORIGIN || "http://localhost:5173";
+
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:5173",
+    origin: FRONTEND_ORIGIN,
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
   },
 });
@@ -21,7 +23,7 @@ const io = new Server(server, {
 connectDB();
 
 // Middleware
-app.use(cors({ origin: "http://localhost:5173" }));
+app.use(cors({ origin: FRONTEND_ORIGIN }));
 app.use(express.json());
 
 // Routes
