@@ -47,7 +47,7 @@ export default function Tracking() {
       setLoadingOrder(false);
       return;
     }
-    fetch(`${API}/api/orders/${id}`)
+    fetch(`${API_BASE_URL}/api/orders/${id}`)
       .then((r) => r.json())
       .then((data) => {
         setOrder(data);
@@ -67,7 +67,7 @@ export default function Tracking() {
   useEffect(() => {
     if (!id) return;
     const interval = setInterval(() => {
-      fetch(`${API}/api/orders/${id}`)
+      fetch(`${API_BASE_URL}/api/orders/${id}`)
         .then((r) => r.json())
         .then((data) => {
           const step = STATUS_TO_STEP[data.status] ?? 0;
